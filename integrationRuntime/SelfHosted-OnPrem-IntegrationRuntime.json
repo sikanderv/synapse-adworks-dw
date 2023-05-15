@@ -1,0 +1,6 @@
+{
+	"name": "SelfHosted-OnPrem-IntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
