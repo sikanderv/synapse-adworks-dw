@@ -1,0 +1,19 @@
+{
+	"name": "ls_OnPrem_SQL_Server",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=DESKTOP-IL310UT\\MDX;initial catalog=AdventureWorks2019;user id=sa",
+			"alwaysEncryptedSettings": {
+				"alwaysEncryptedAkvAuthType": "ManagedIdentity"
+			},
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzNDNkOWE3Mi0zMDg2LTRlZjQtOWJkYS00NmFiYjUzMTJiMGUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfHosted-OnPrem-IntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
