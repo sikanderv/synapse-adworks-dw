@@ -1,7 +1,7 @@
 {
-	"name": "Customer",
+	"name": "SalesOrder",
 	"properties": {
-		"Name": "Customer",
+		"Name": "SalesOrder",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "adworks"
@@ -14,7 +14,33 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "CustomerKey",
+					"Name": "SalesOrderLine",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 8000,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "SalesOrder",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 8000,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "SalesOrderLineKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsNullable": true,
@@ -26,72 +52,7 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "CustomerId",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Length": 8000,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "Customer",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Length": 8000,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "City",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Length": 8000,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "StateProvince",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Length": 8000,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "CountryRegion",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Length": 8000,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "PostalCode",
+					"Name": "Channel",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": true,
@@ -110,7 +71,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/CustomerData/CustomerData.csv",
+					"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/SalesOrder/SalesOrder.csv",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -121,7 +82,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/CustomerData/CustomerData.csv",
+				"Location": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/SalesOrder/SalesOrder.csv",
 				"Properties": {
 					"LinkedServiceName": "ws-adworks-dw-demo-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": false
