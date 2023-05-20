@@ -2487,7 +2487,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/adworks')]",
+			"name": "[concat(parameters('workspaceName'), '/source')]",
 			"type": "Microsoft.Synapse/workspaces/databases",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -2496,7 +2496,7 @@
 						"ActionType": "CREATE",
 						"OldEntity": null,
 						"NewEntity": {
-							"Name": "adworks",
+							"Name": "source",
 							"EntityType": "DATABASE",
 							"Origin": {
 								"Type": "SPARK"
@@ -2524,7 +2524,7 @@
 							"Name": "CustomerData",
 							"EntityType": "TABLE",
 							"Namespace": {
-								"DatabaseName": "adworks"
+								"DatabaseName": "source"
 							},
 							"Description": "",
 							"TableType": "EXTERNAL",
@@ -2676,7 +2676,7 @@
 							"Name": "Sales",
 							"EntityType": "TABLE",
 							"Namespace": {
-								"DatabaseName": "adworks"
+								"DatabaseName": "source"
 							},
 							"Description": "",
 							"TableType": "EXTERNAL",
@@ -2930,7 +2930,7 @@
 							"Name": "SalesOrder",
 							"EntityType": "TABLE",
 							"Namespace": {
-								"DatabaseName": "adworks"
+								"DatabaseName": "source"
 							},
 							"Description": "",
 							"TableType": "EXTERNAL",
