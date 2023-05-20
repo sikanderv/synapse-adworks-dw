@@ -1,7 +1,7 @@
 {
-	"name": "Customer",
+	"name": "CustomerData",
 	"properties": {
-		"Name": "Customer",
+		"Name": "CustomerData",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "adworks"
