@@ -17,8 +17,8 @@
 					"Name": "SalesAmount",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -31,8 +31,8 @@
 					"Name": "TotalProductCost",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -45,8 +45,8 @@
 					"Name": "ProductStandardCost",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -59,8 +59,8 @@
 					"Name": "UnitPriceDiscountPct",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -73,8 +73,8 @@
 					"Name": "ExtendedAmount",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -87,8 +87,8 @@
 					"Name": "UnitPrice",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -101,8 +101,8 @@
 					"Name": "OrderQuantity",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -113,8 +113,8 @@
 					"Name": "SalesTerritoryKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -125,8 +125,8 @@
 					"Name": "ShipDateKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -137,8 +137,8 @@
 					"Name": "DueDateKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -149,8 +149,8 @@
 					"Name": "OrderDateKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -161,8 +161,8 @@
 					"Name": "ProductKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -173,8 +173,8 @@
 					"Name": "CustomerKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -185,8 +185,8 @@
 					"Name": "ResellerKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -197,8 +197,8 @@
 					"Name": "SalesOrderLineKey",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -231,7 +231,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
