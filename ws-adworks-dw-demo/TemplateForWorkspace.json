@@ -26,15 +26,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('workspaceName'), '/CustomerMapping')]",
-			"type": "Microsoft.Synapse/workspaces/dataMappers",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/linkedServices/ws-adworks-dw-demo-WorkspaceDefaultStorage')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/Copy Sql Tables to Data Lake')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -2551,7 +2542,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 100,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2564,7 +2555,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 400,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2577,7 +2568,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 100,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2590,7 +2581,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 100,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2603,7 +2594,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 100,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2616,7 +2607,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 50,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2663,7 +2654,8 @@
 							},
 							"Retention": 0,
 							"Temporary": false,
-							"IsRewriteEnabled": false
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -2945,7 +2937,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 400,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2958,7 +2950,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 400,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -2983,7 +2975,7 @@
 											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 8000,
+											"Length": 400,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
@@ -3030,7 +3022,622 @@
 							},
 							"Retention": 0,
 							"Temporary": false,
-							"IsRewriteEnabled": false
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Date",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "source"
+							},
+							"Description": "",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "DateKey",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Date",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 10,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "FiscalYear",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 6,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "FiscalQuarter",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 10,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Month",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 20,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "FullDate",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 20,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "MonthKey",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 6,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Date/Date.csv",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"FormatTypeSetToDatabaseDefault": false,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Date/Date.csv",
+									"Properties": {
+										"LinkedServiceName": "ws-adworks-dw-demo-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": false
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "ProductData",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "source"
+							},
+							"Description": "",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "Category",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 400,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Subcategory",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 400,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Model",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 400,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "ListPrice",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Color",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "StandardCost",
+										"OriginDataTypeName": {
+											"TypeName": "decimal",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Precision": 18,
+											"Scale": 2,
+											"Properties": {
+												"HIVE_TYPE_STRING": "decimal"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Product",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 400,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "SKU",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "ProductKey",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/ProductData/ProductData.csv",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"FormatTypeSetToDatabaseDefault": false,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/ProductData/ProductData.csv",
+									"Properties": {
+										"LinkedServiceName": "ws-adworks-dw-demo-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": false
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "SalesTerritory",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "source"
+							},
+							"Description": "",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "SalesTerritoryKey",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Region",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Country",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Group",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 200,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/SalesTerritory/SalesTerritory.csv",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"FormatTypeSetToDatabaseDefault": false,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/SalesTerritory/SalesTerritory.csv",
+									"Properties": {
+										"LinkedServiceName": "ws-adworks-dw-demo-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": false
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Reseller",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "source"
+							},
+							"Description": "",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "PostalCode",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 50,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "CountryRegion",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "StateProvince",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "City",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "Reseller",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "BusinessType",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 200,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "ResellerId",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 100,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									},
+									{
+										"Name": "ResellerKey",
+										"OriginDataTypeName": {
+											"TypeName": "long",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "long"
+											}
+										},
+										"DeltaFormatInvalidMessages": []
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Reseller/Reseller.csv",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"FormatTypeSetToDatabaseDefault": false,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Reseller/Reseller.csv",
+									"Properties": {
+										"LinkedServiceName": "ws-adworks-dw-demo-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": false
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
 						},
 						"Source": {
 							"Type": "SPARK"
