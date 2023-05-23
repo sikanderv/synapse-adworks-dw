@@ -26,13 +26,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('workspaceName'), '/customermapping')]",
-			"type": "Microsoft.Synapse/workspaces/dataMappers",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/Copy Sql Tables to Data Lake')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -1947,7 +1940,7 @@
 							"name": "IndividualCustomer"
 						}
 					],
-					"script": "parameters{\n\tmodifiedAfter as timestamp,\n\tmodifiedBefore as timestamp\n}\nsource(output(\n\t\tCustomerKey as integer,\n\t\tCustomerId as string,\n\t\tCustomer as string,\n\t\tCity as string,\n\t\tStateProvince as string,\n\t\tCountryRegion as string,\n\t\tPostalCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'source',\n\ttableName: 'CustomerData',\n\tmanifestType: 'manifest') ~> CustomerDataDeltaSource\nCustomerDataDeltaSource aggregate(groupBy(CustomerKey),\n\tPostalCode = last(PostalCode),\n\t\tCountryRegion = last(CountryRegion),\n\t\tStateProvince = last(StateProvince),\n\t\tCity = last(City),\n\t\tCustomer = last(Customer),\n\t\tCustomerId = last(CustomerId)) ~> Deduplicated1CustomerDataDeltaSource\nDeduplicated1CustomerDataDeltaSource select(mapColumn(\n\t\tPostalCode,\n\t\tCountryRegion,\n\t\tStateProvince,\n\t\tCity,\n\t\tCustomer,\n\t\tCustomerId,\n\t\tCustomerKey\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> CustomerData\nCustomerData select(mapColumn(\n\t\tCustomerKey,\n\t\tCustomer\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectCustomerData\nSelectCustomerData select(mapColumn(\n\t\tCustomerId = CustomerKey,\n\t\tIndividualCustomerName = Customer\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> IndividualCustomer\nIndividualCustomer sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'adworkstarget',\n\ttableName: 'IndividualCustomer',\n\tpartitionBy('hash', 1),\n\tmanifestType: 'manifest') ~> IndividualCustomerSink"
+					"script": "parameters{\n\tmodifiedAfter as timestamp,\n\tmodifiedBefore as timestamp\n}\nsource(output(\n\t\tCustomerKey as integer,\n\t\tCustomerId as string,\n\t\tCustomer as string,\n\t\tCity as string,\n\t\tStateProvince as string,\n\t\tCountryRegion as string,\n\t\tPostalCode as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'adworks',\n\ttableName: 'CustomerData',\n\tmanifestType: 'manifest') ~> CustomerDataDeltaSource\nCustomerDataDeltaSource aggregate(groupBy(CustomerKey),\n\tPostalCode = last(PostalCode),\n\t\tCountryRegion = last(CountryRegion),\n\t\tStateProvince = last(StateProvince),\n\t\tCity = last(City),\n\t\tCustomer = last(Customer),\n\t\tCustomerId = last(CustomerId)) ~> Deduplicated1CustomerDataDeltaSource\nDeduplicated1CustomerDataDeltaSource select(mapColumn(\n\t\tPostalCode,\n\t\tCountryRegion,\n\t\tStateProvince,\n\t\tCity,\n\t\tCustomer,\n\t\tCustomerId,\n\t\tCustomerKey\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> CustomerData\nCustomerData select(mapColumn(\n\t\tCustomerKey,\n\t\tCustomer\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectCustomerData\nSelectCustomerData select(mapColumn(\n\t\tCustomerId = CustomerKey,\n\t\tIndividualCustomerName = Customer\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> IndividualCustomer\nIndividualCustomer sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'adworkstarget',\n\ttableName: 'IndividualCustomer',\n\tpartitionBy('hash', 1),\n\tmanifestType: 'manifest') ~> IndividualCustomerSink"
 				}
 			},
 			"dependsOn": []
@@ -2560,8 +2553,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "CustomerId",
@@ -2573,8 +2565,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Customer",
@@ -2586,8 +2577,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "City",
@@ -2599,8 +2589,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "StateProvince",
@@ -2612,8 +2601,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "CountryRegion",
@@ -2625,8 +2613,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "PostalCode",
@@ -2638,8 +2625,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -2650,8 +2636,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/CustomerData/CustomerData.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
@@ -2712,8 +2698,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Date",
@@ -2725,8 +2710,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "FiscalYear",
@@ -2738,8 +2722,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "FiscalQuarter",
@@ -2751,8 +2734,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Month",
@@ -2764,8 +2746,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "FullDate",
@@ -2777,8 +2758,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "MonthKey",
@@ -2790,8 +2770,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -2802,8 +2781,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Date/Date.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
@@ -2865,8 +2844,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Subcategory",
@@ -2878,8 +2856,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Model",
@@ -2891,8 +2868,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ListPrice",
@@ -2905,8 +2881,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Color",
@@ -2918,8 +2893,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "StandardCost",
@@ -2932,8 +2906,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Product",
@@ -2945,8 +2918,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "SKU",
@@ -2958,8 +2930,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ProductKey",
@@ -2970,8 +2941,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -2982,8 +2952,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/ProductData/ProductData.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
@@ -3045,8 +3015,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "CountryRegion",
@@ -3058,8 +3027,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "StateProvince",
@@ -3071,8 +3039,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "City",
@@ -3084,8 +3051,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Reseller",
@@ -3097,8 +3063,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "BusinessType",
@@ -3110,8 +3075,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ResellerId",
@@ -3123,8 +3087,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ResellerKey",
@@ -3135,8 +3098,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "long"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -3147,8 +3109,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Reseller/Reseller.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
@@ -3211,8 +3173,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "TotalProductCost",
@@ -3225,8 +3186,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ProductStandardCost",
@@ -3239,8 +3199,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "UnitPriceDiscountPct",
@@ -3253,8 +3212,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ExtendedAmount",
@@ -3267,8 +3225,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "UnitPrice",
@@ -3281,8 +3238,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "OrderQuantity",
@@ -3293,8 +3249,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "SalesTerritoryKey",
@@ -3305,8 +3260,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ShipDateKey",
@@ -3317,8 +3271,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "DueDateKey",
@@ -3329,8 +3282,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "OrderDateKey",
@@ -3341,8 +3293,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ProductKey",
@@ -3353,8 +3304,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "CustomerKey",
@@ -3365,8 +3315,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "ResellerKey",
@@ -3377,8 +3326,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "SalesOrderLineKey",
@@ -3389,8 +3337,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -3401,8 +3348,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/Sales/Sales.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
@@ -3464,8 +3411,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "SalesOrder",
@@ -3477,8 +3423,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "SalesOrderLineKey",
@@ -3489,8 +3434,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Channel",
@@ -3502,8 +3446,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -3514,8 +3457,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/SalesOrder/SalesOrder.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
@@ -3576,8 +3519,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Region",
@@ -3589,8 +3531,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Country",
@@ -3602,8 +3543,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "Group",
@@ -3615,8 +3555,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -3627,8 +3566,8 @@
 									"Properties": {
 										"path": "abfss://adworks@dlsprimarystorage.dfs.core.windows.net/Source/SalesTerritory/SalesTerritory.csv",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"FormatTypeSetToDatabaseDefault": false,
 										"header": "false"
