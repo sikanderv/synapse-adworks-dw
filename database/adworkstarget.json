@@ -1,0 +1,22 @@
+{
+	"name": "adworkstarget",
+	"properties": {
+		"Name": "adworkstarget",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://adworks-dw-demo@dlsprimarystorage.dfs.core.windows.net/adworkstarget",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "ws-adworks-dw-demo-WorkspaceDefaultStorage"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
