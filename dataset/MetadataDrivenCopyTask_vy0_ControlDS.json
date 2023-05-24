@@ -1,0 +1,18 @@
+{
+	"name": "MetadataDrivenCopyTask_vy0_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_OnPrem_SQL_Server",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_vy0_20230524"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "MainControlTable_vy0"
+		}
+	}
+}
