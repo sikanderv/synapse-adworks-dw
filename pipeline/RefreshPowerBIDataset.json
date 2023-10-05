@@ -1,0 +1,51 @@
+{
+	"name": "RefreshPowerBIDataset",
+	"properties": {
+		"activities": [
+			{
+				"name": "RefreshPowerBI",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://api.powerbi.com/v1.0/myorg/groups', pipeline().parameters.WorkspaceId, '/datasets/',pipeline().parameters.DatasetId, '/refreshes')",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"body": {
+						"value": "@concat('{', '\"applyRefreshPolicy\":\"false\", \"retryCount\":\"0\"', '}')",
+						"type": "Expression"
+					},
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://analysis.windows.net/powerbi/api"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"WorkspaceId": {
+				"type": "string"
+			},
+			"DatasetId": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Power BI"
+		},
+		"annotations": []
+	}
+}
